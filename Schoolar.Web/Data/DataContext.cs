@@ -13,7 +13,7 @@
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        /*protected override void OnModelCreating(ModelBuilder builder)
         {
             var cascadeFKs = builder.Model
            .G­etEntityTypes()
@@ -24,10 +24,10 @@
                 fk.DeleteBehavior = DeleteBehavior.Restr­ict;
             }
 
-            base.OnModelCreating(builder);
-            builder.Entity<Teacher>()
-                .HasIndex(t => t.User.UserName)
-                .IsUnique();
-        }
+            //base.OnModelCreating(builder);
+            //builder.Entity<Teacher>()
+            //    .HasIndex(t => t.User.UserName)
+            //    .IsUnique();
+        }*/
     }
 }

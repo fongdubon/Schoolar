@@ -6,8 +6,9 @@
     public class Teacher : IEntity
     {
         public int Id { get; set; }
+
         [Required(ErrorMessage = "{0} is required")]
-        [MaxLength(50, ErrorMessage = "{0} the field must have a maximum of {1} characters")]
+        [DataType(DataType.Date)]
         [Display(Name = "Hire date")]
         public DateTime HireDate { get; set; }
 

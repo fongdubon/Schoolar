@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Mvc.Rendering;
     using System.Collections.Generic;
     using System.Linq;
+    using Microsoft.EntityFrameworkCore;
 
     public class TeacherRepository : GenericRepository<Teacher>, ITeacherRepository
     {
@@ -27,6 +28,13 @@
                 Value = "0"
             });
             return list;
+        }
+
+        public IQueryable GetTeachersWithUser()
+        {
+            return this._dataContext.Teachers
+                .Include(t => t.User)
+                .OrderBy(t => t.User.FullName);
         }
     }
 }
