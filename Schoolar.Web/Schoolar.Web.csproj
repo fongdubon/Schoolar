@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Schoolar.Common\Schoolar.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\Teacher\" />
+  </ItemGroup>
+
 </Project>

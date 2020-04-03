@@ -67,27 +67,40 @@
 
             return Ok(teacherNew);
         }
-        //Put
-        /*
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutTeacher([FromRoute] int id, [FromBody]Common.Models.Teacher teacher)
         {
             if (!ModelState.IsValid)
             {
                 return this.BadRequest(ModelState);
             }
+
             if (id != teacher.Id)
             {
                 return this.BadRequest("Error Id");
             }
-            Teacher teacherOld = await this.teacherRepository.GetByIdAsync(id);
+
+            var user = await this.userHelper.GetUserByEmailAsync(teacher.UserName);
+            if (user == null)
+            {
+                return this.BadRequest("Usuario No Existe");
+            }
+
+            user.FirstName = teacher.FirstName;
+            user.LastName = teacher.LastName;
+            user.PhoneNumber = teacher.PhoneNumber;
+            user.Enrollment = teacher.Enrollment;
+
+            Teacher teacherOld = await this.teacherRepository.GetTeacherByIDWithUser(id);
             if (teacherOld == null)
             {
                 return this.BadRequest("teacher don't exist");
             }
-            teacherOld.Id = teacher.Id;
-            teacherOld.User.FirstName = teacher.user.firName;
-            teacherOld.User.LastName = teacher.user.LastName;
-            teacherOld.User.PhoneNumber = teacherOld.User.PhoneNumber;
+
+            teacherOld.HireDate = teacher.HireDate;
+            // TODO: Imagen teacherOld.ImageUrl
+            teacherOld.User = user;
+
 
             //TODO: actualizar imagen
             Teacher teacherUpdate = await this.teacherRepository.UpdateAsync(teacherOld);
@@ -102,7 +115,7 @@
             {
                 return this.BadRequest(ModelState);
             }
-            Teacher teacher = await this.teacherRepository.GetByIdAsync(id);
+            Teacher teacher = await this.teacherRepository.GetTeacherByIDWithUser(id);
             if (teacher == null)
             {
                 return this.BadRequest("teacher don't exist");
@@ -110,6 +123,5 @@
             await this.teacherRepository.DeleteAsync(teacher);
             return Ok(teacher);
         }
-        */
     }
 }

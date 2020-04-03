@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.EntityFrameworkCore;
+    using System.Threading.Tasks;
 
     public class TeacherRepository : GenericRepository<Teacher>, ITeacherRepository
     {
@@ -35,6 +36,13 @@
             return this._dataContext.Teachers
                 .Include(t => t.User)
                 .OrderBy(t => t.User.FullName);
+        }
+
+        public async Task<Teacher> GetTeacherByIDWithUser(int id)
+        {
+            return await this._dataContext.Teachers
+               .Include(t => t.User)
+               .FirstOrDefaultAsync(t => t.Id == id);
         }
     }
 }

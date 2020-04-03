@@ -73,14 +73,60 @@
 
         public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var teacher = await teacherRepository.GetTeacherByIDWithUser(id.Value);
+            if (teacher == null)
+            {
+                return NotFound();
+            }
+
+            var model = new TeacherViewModel
+            {
+                HireDate = teacher.HireDate,
+                Id = teacher.Id,
+                ImageUrl = teacher.ImageUrl,
+                User = teacher.User
+            };
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Teacher teacher)
+        public async Task<IActionResult> Edit(TeacherViewModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                var user = await this.userHelper.GetUserByEmailAsync(model.User.UserName);
+                if (user == null)
+                {
+                    return NotFound(":(");
+                }
+                user.FirstName = model.User.FirstName;
+                user.LastName = model.User.LastName;
+                user.PhoneNumber = model.User.PhoneNumber;
+                user.Enrollment = model.User.Enrollment;
+
+                //var result = await this.userHelper.UpdateUserAsync(user);
+
+                var teacher = await teacherRepository.GetTeacherByIDWithUser(model.Id);
+                if (teacher == null)
+                {
+                    return NotFound(":(");
+                }
+
+                teacher.HireDate = model.HireDate;
+                teacher.User = user;
+
+                //TODO manejar la imagen
+                await teacherRepository.UpdateAsync(teacher);
+                return RedirectToAction(nameof(Index));
+
+            }
+            return View(model);
         }
         public async Task<IActionResult> Delete(int? id)
         {

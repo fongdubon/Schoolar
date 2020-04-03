@@ -21,5 +21,7 @@
         public DateTime HireDate { get; set; }
 
         public string ImageUrl { get; set; }
+
+        public Uri FullImageUrl { get; set; }
     }
 }
