@@ -38,7 +38,7 @@
             this.IsRefreshing = true;
 
             var response = await this.apiService.GetListAsync<Teacher>(
-               "https://donacionesweb20191113125005.azurewebsites.net",
+               "https://schoolarumad.azurewebsites.net",
                "/API",
                "/Teachers");
 

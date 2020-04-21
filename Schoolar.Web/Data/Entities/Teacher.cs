@@ -14,8 +14,8 @@
 
         [Display(Name = "Foto")]
         public string ImageUrl { get; set; }
-
-        public string FullImageUrl => string.IsNullOrEmpty(ImageUrl) ? null : $"https://donacionesweb20191024093102.azurewebsites.net{ImageUrl.Substring(1)}";
+        
+        public string FullImageUrl => string.IsNullOrEmpty(ImageUrl) ? null : $"https://schoolarumad.azurewebsites.net{ImageUrl.Substring(1)}";
 
         public User User { get; set; }
     }
