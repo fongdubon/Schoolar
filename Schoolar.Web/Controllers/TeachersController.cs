@@ -11,12 +11,15 @@
     public class TeachersController : Controller
     {
         private readonly IUserHelper userHelper;
+        private readonly IImageHelper imageHelper;
         private readonly ITeacherRepository teacherRepository;
 
         public TeachersController(IUserHelper userHelper,
+            IImageHelper imageHelper,
             ITeacherRepository teacherRepository)
         {
             this.userHelper = userHelper;
+            this.imageHelper = imageHelper;
             this.teacherRepository = teacherRepository;
         }
 
@@ -63,7 +66,12 @@
                         HireDate = model.HireDate,
                         User = user
                     };
-                    //TODO manejar la imagen
+                    //TODO: 1explicar que se agrego imagen
+                    if (model.ImageFile != null)
+                    {
+                        teacher.ImageUrl = await imageHelper.UploadImageAsync(
+                            model.ImageFile, model.User.UserName, "Teacher");
+                    }
                     await teacherRepository.CreateAsync(teacher);
                     return RedirectToAction(nameof(Index));
                 }
@@ -110,8 +118,6 @@
                 user.PhoneNumber = model.User.PhoneNumber;
                 user.Enrollment = model.User.Enrollment;
 
-                //var result = await this.userHelper.UpdateUserAsync(user);
-
                 var teacher = await teacherRepository.GetTeacherByIDWithUser(model.Id);
                 if (teacher == null)
                 {
@@ -121,7 +127,12 @@
                 teacher.HireDate = model.HireDate;
                 teacher.User = user;
 
-                //TODO manejar la imagen
+                //TODO: 1 explicar la imagen
+                if (model.ImageFile != null)
+                {
+                    teacher.ImageUrl = await imageHelper.UploadImageAsync(
+                        model.ImageFile, model.User.UserName, "Teacher");
+                }
                 await teacherRepository.UpdateAsync(teacher);
                 return RedirectToAction(nameof(Index));
 
@@ -130,14 +141,42 @@
         }
         public async Task<IActionResult> Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var teacher = await teacherRepository.GetByIdAsync(id.Value);
+            if (teacher == null)
+            {
+                return NotFound();
+            }
+            return View(teacher);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            return View();
+            var teacher = await teacherRepository.GetByIdAsync(id);
+            try
+            {
+                await teacherRepository.DeleteAsync(teacher);
+                return RedirectToAction(nameof(Index));
+            }
+            //TODO: 2 Explicar la eliminación en cascada
+            catch (Exception ex)
+            {
+                if (ex.InnerException.Message.Contains("conflicted"))
+                {
+                    ModelState.AddModelError(string.Empty, "El registro no puede ser eliminado porque esta relacionado con otro registro");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                }
+            }
+            return View(teacher);
         }
 
     }

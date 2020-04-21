@@ -23,11 +23,6 @@
             {
                 fk.DeleteBehavior = DeleteBehavior.Restr­ict;
             }
-
-            //base.OnModelCreating(builder);
-            //builder.Entity<Teacher>()
-            //    .HasIndex(t => t.User.UserName)
-            //    .IsUnique();
         }*/
     }
 }
