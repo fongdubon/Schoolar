@@ -28,7 +28,6 @@
             return View(this.teacherRepository.GetTeachersWithUser());
         }
 
-        // GET: Teachers/Create
         public IActionResult Create()
         {
             var model = new TeacherViewModel
@@ -66,7 +65,7 @@
                         HireDate = model.HireDate,
                         User = user
                     };
-                    //TODO: 1explicar que se agrego imagen
+
                     if (model.ImageFile != null)
                     {
                         teacher.ImageUrl = await imageHelper.UploadImageAsync(
@@ -127,7 +126,6 @@
                 teacher.HireDate = model.HireDate;
                 teacher.User = user;
 
-                //TODO: 1 explicar la imagen
                 if (model.ImageFile != null)
                 {
                     teacher.ImageUrl = await imageHelper.UploadImageAsync(
@@ -139,6 +137,7 @@
             }
             return View(model);
         }
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -164,7 +163,7 @@
                 await teacherRepository.DeleteAsync(teacher);
                 return RedirectToAction(nameof(Index));
             }
-            //TODO: 2 Explicar la eliminación en cascada
+
             catch (Exception ex)
             {
                 if (ex.InnerException.Message.Contains("conflicted"))
