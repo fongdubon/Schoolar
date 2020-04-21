@@ -34,5 +34,10 @@
 
         [JsonProperty("fullImageUrl")]
         public Uri FullImageUrl { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.LastName} {this.FirstName}";
+        }
     }
 }
