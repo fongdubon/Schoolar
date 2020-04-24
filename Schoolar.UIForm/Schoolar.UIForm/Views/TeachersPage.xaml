@@ -7,6 +7,11 @@
              x:Class="Schoolar.UIForm.Views.TeachersPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Teachers">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            IconImageSource="ic_action_add_circle" 
+            Command="{Binding AddTeacherCommand}"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout BindingContext="{Binding Teachers}" Padding="8">
             <ListView
@@ -29,7 +34,7 @@
                                 	WidthRequest="100">
                                 </Image>
                                 <StackLayout
-                                Grid.Column="0"
+                                Grid.Column="1"
                                 VerticalOptions="Center">
                                     <Label
                                     FontAttributes="Bold"
@@ -37,10 +42,6 @@
                                     Text="{Binding LastName}"
                                     TextColor="Black">
                                     </Label>
-                                </StackLayout>
-                                <StackLayout
-                                Grid.Column="1"
-                                VerticalOptions="Center">
                                     <Label
                                     Text="{Binding FirstName}"
                                     TextColor="Black">

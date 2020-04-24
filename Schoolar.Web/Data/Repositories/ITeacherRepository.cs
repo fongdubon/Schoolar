@@ -12,6 +12,8 @@
 
         IQueryable GetTeachersWithUser();
 
+        IEnumerable<Common.Models.Teacher> GetTeachersCommonToList();
+
         Task<Teacher> GetTeacherByIDWithUser(int id);
     }
 }

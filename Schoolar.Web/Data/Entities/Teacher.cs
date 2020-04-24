@@ -14,8 +14,9 @@
 
         [Display(Name = "Foto")]
         public string ImageUrl { get; set; }
-        //cambio
-        public string FullImageUrl => string.IsNullOrEmpty(ImageUrl) ? null : $"https://schoolarumad.azurewebsites.net{ImageUrl.Substring(1)}";
+        //cambio https://schoolarweb.azurewebsites.net
+        //public string FullImageUrl => string.IsNullOrEmpty(ImageUrl) ? null : $"https://schoolarumad.azurewebsites.net{ImageUrl.Substring(1)}";
+        public string FullImageUrl => string.IsNullOrEmpty(ImageUrl) ? null : $"https://schoolarweb.azurewebsites.net{ImageUrl.Substring(1)}";
 
         public User User { get; set; }
     }

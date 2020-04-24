@@ -139,9 +139,7 @@
                 };
             }
         }
-
-
-
+        //TODO: 1 crear metodo post crear
         //generico model
         public async Task<Response> PostAsync<T>(
     string urlBase,
@@ -190,6 +188,7 @@
                 };
             }
         }
+        //TODO: 2 crear el metodo put modificar
         public async Task<Response> PutAsync<T>(
     string urlBase,
     string servicePrefix,
@@ -237,7 +236,7 @@
                 };
             }
         }
-
+        //TODO: 3 crear el metodo delete
         public async Task<Response> DeleteAsync(
             string urlBase,
             string servicePrefix,
@@ -279,7 +278,6 @@
                     Message = ex.Message,
                 };
             }
-
         }
     }
 }

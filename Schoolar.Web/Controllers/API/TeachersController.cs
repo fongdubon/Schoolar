@@ -6,6 +6,7 @@
     using Schoolar.Web.Data.Entities;
     using System.Threading.Tasks;
     using Schoolar.Web.Models;
+    using System.Collections.Generic;
 
     [Route("api/[Controller]")]
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -24,7 +25,7 @@
         [HttpGet]
         public IActionResult GetTeachers()
         {
-            return Ok(this.teacherRepository.GetTeachersWithUser());
+            return Ok(this.teacherRepository.GetTeachersCommonToList());
         }
 
         [HttpPost]

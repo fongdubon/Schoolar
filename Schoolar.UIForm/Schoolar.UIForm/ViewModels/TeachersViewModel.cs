@@ -10,6 +10,8 @@
     {
         private ApiService apiService;
 
+        private ObservableCollection<Teacher> teachers;
+
         private bool isRefreshing;
 
         public bool IsRefreshing
@@ -17,8 +19,6 @@
             get { return this.isRefreshing; }
             set { this.SetValue(ref this.isRefreshing, value); }
         }
-
-        private ObservableCollection<Teacher> teachers;
 
         public ObservableCollection<Teacher> Teachers
         {
@@ -37,8 +37,9 @@
         {
             this.IsRefreshing = true;
 
+            var url = Application.Current.Resources["UrlAPI"].ToString();
             var response = await this.apiService.GetListAsync<Teacher>(
-               "https://schoolarumad.azurewebsites.net",
+               url,
                "/API",
                "/Teachers");
 
@@ -52,8 +53,8 @@
                     "Accept");
                 return;
             }
-            var myProducts = (List<Teacher>)response.Result;
-            this.Teachers = new ObservableCollection<Teacher>(myProducts);
+            var myTeachers = (List<Teacher>)response.Result;
+            this.Teachers = new ObservableCollection<Teacher>(myTeachers);
         }
     }
 }

@@ -6,7 +6,7 @@
     using System.Windows.Input;
     using Xamarin.Forms;
 
-    public class LoginViewModel
+    public class LoginViewModel:BaseViewModel
     {
         public string Email { get; set; }
 
@@ -48,9 +48,11 @@
                     "Accept");
                 return;
             }
-            MainViewModel.GetInstance().Teachers = new TeachersViewModel();
-            await Application.Current.MainPage.Navigation.PushAsync(new TeachersPage());
-            return;
+            var url = Application.Current.Resources["UrlAPI"].ToString();
+
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.Teachers = new TeachersViewModel();
+            Application.Current.MainPage = new MasterPage(); 
         }
         public LoginViewModel()
         {

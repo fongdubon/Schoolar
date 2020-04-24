@@ -9,6 +9,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <infra:InstanceLocator x:Key="Locator"/>
+            <x:String x:Key="UrlAPI">https://schoolarweb.azurewebsites.net</x:String>
         </ResourceDictionary>
     </Application.Resources>
 

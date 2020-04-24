@@ -18,7 +18,7 @@
 
         public IEnumerable<SelectListItem> GetComboTeachers()
         {
-            var list = _dataContext.Teachers.Select(c => new SelectListItem
+            var list = this._dataContext.Teachers.Select(c => new SelectListItem
             {
                 Text = c.User.FullName,
                 Value = $"{c.Id}"
@@ -36,6 +36,23 @@
             return this._dataContext.Teachers
                 .Include(t => t.User)
                 .OrderBy(t => t.User.FullName);
+        }
+
+        public IEnumerable<Common.Models.Teacher> GetTeachersCommonToList()
+        {
+            var list= this._dataContext.Teachers.Select(c => new Common.Models.Teacher
+            {
+                Enrollment = c.User.Enrollment,
+                FirstName = c.User.FirstName,
+                FullImageUrl = new System.Uri(c.FullImageUrl),
+                HireDate = c.HireDate,
+                Id = c.Id,
+                ImageUrl = c.ImageUrl,
+                LastName = c.User.LastName,
+                PhoneNumber = c.User.PhoneNumber,
+                UserName = c.User.UserName
+            }).ToList();
+            return list;
         }
 
         public async Task<Teacher> GetTeacherByIDWithUser(int id)
