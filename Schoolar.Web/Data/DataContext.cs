@@ -9,6 +9,8 @@
     {
         public DbSet<Teacher> Teachers { get; set; }
 
+        public DbSet<Coordinator> Coordinators { get; set; }
+
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
