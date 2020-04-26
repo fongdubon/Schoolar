@@ -36,9 +36,22 @@
                 .OrderBy(t => t.User.FullName);
         }
 
-
-        //Metodo Common pendiente.
-
+        public IEnumerable<Common.Models.Coordinator> GetCoordinatorsCommonToList()
+        {
+            var list = this._dataContext.Coordinators.Select(c => new Common.Models.Coordinator
+            {
+                Enrollment = c.User.Enrollment,
+                FirstName = c.User.FirstName,
+                FullImageUrl = new System.Uri(c.FullImageUrl),
+                HireDate = c.HireDate,
+                Id = c.Id,
+                ImageUrl = c.ImageUrl,
+                LastName = c.User.LastName,
+                PhoneNumber = c.User.PhoneNumber,
+                UserName = c.User.UserName
+            }).ToList();
+            return list;
+        }
 
         public async Task<Coordinator> GetCoordinatorByIDWithUser(int id)
         {

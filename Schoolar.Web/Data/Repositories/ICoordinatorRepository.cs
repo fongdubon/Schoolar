@@ -11,8 +11,7 @@
 
         IQueryable GetCoordinatorWithUser();
 
-        //Pendiente Common
-        //IEnumerable<Common.Models.Teacher> GetCoordinatorsCommonToList();
+        IEnumerable<Common.Models.Coordinator> GetCoordinatorsCommonToList();
 
         Task<Coordinator> GetCoordinatorByIDWithUser(int id);
     }
