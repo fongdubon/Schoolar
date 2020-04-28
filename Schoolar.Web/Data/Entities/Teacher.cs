@@ -18,7 +18,7 @@
         public string FullImageUrl => string.IsNullOrEmpty(ImageUrl) ? null : $"https://umadschoolar.azurewebsites.net{ImageUrl.Substring(1)}";
         //public string FullImageUrl => string.IsNullOrEmpty(ImageUrl) ? null : $"https://schoolarweb.azurewebsites.net{ImageUrl.Substring(1)}";
 
-        public User User { get; set; }
+        public User User { get; set;}
     }
 }
 
