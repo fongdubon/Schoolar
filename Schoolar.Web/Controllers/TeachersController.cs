@@ -178,5 +178,8 @@
             return View(teacher);
         }
 
+        public async Task<IActionResult> Details(int? Id)        {            if (Id == null)            {                return NotFound();            }            var teacher = await this.teacherRepository.GetTeacherByIDWithUser(Id.Value);            if (teacher == null)            {                return NotFound();            }            return View(teacher);        }
+
+
     }
 }

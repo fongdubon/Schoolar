@@ -18,6 +18,7 @@
             await _dataContext.Database.EnsureCreatedAsync();
 
             await _userHelper.CheckRoleAsync("Teacher");
+            await _userHelper.CheckRoleAsync("Coordinator");
         }
     }
 }

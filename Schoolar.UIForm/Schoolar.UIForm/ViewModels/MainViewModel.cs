@@ -21,6 +21,8 @@ namespace Schoolar.UIForm.ViewModels
 
         public AddTeacherViewModel AddTeacher { get; set; }
 
+        public CoordinatorViewModel Coordinator { get; set; }
+
         public ICommand AddTeacherCommand { get { return new RelayCommand(this.GoAddTeacher); } }
 
         public MainViewModel()

@@ -51,7 +51,7 @@
             var url = Application.Current.Resources["UrlAPI"].ToString();
 
             var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.Teachers = new TeachersViewModel();
+            mainViewModel.Coordinator = new CoordinatorViewModel();
             Application.Current.MainPage = new MasterPage(); 
         }
         public LoginViewModel()

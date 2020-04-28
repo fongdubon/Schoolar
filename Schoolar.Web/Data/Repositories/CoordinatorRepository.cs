@@ -23,7 +23,7 @@
             }).ToList();
             list.Insert(0, new SelectListItem
             {
-                Text = "(Selecciona un Coordinador...)",
+                Text = "(Select a Coordinator...)",
                 Value = "0"
             });
             return list;

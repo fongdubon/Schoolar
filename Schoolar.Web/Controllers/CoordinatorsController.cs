@@ -145,7 +145,7 @@
                 return NotFound();
             }
 
-            var coordinator = await coordinatorRepository.GetByIdAsync(id.Value);
+            var coordinator = await coordinatorRepository.GetCoordinatorByIDWithUser(id.Value);
             if (coordinator == null)
             {
                 return NotFound();
@@ -177,5 +177,9 @@
             }
             return View(coordinator);
         }
+
+        public async Task<IActionResult> Details(int? Id)        {            if (Id == null)            {                return NotFound();            }            var coordinator = await this.coordinatorRepository.GetCoordinatorByIDWithUser(Id.Value);            if (coordinator == null)            {                return NotFound();            }            return View(coordinator);        }
+
+
     }
 }
